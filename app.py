@@ -5,10 +5,10 @@ Created on Sat Mar 11 12:15:25 2017
 @author: xuke2
 """
 import sys
-project_dir = '/home/pi/flaskapp/flaskapp_msx'
-
-sys.path.insert(0, project_dir)
-
+import os
+cwd = os.getcwd()
+if cwd not in sys.path:
+    sys.path.insert(0, os.getcwd())
 from flask import Flask, render_template, Response, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from main import inputForms
