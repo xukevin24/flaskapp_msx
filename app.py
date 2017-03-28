@@ -4,6 +4,10 @@ Created on Sat Mar 11 12:15:25 2017
 
 @author: xuke2
 """
+import sys
+project_dir = '/home/pi/flaskapp'
+sys.path.insert(0, project_dir)
+
 from flask import Flask, render_template, Response, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from main import inputForms
