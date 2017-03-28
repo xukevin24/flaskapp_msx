@@ -17,8 +17,9 @@ from flask_bootstrap import Bootstrap
 from main import inputForms
 from main import singleStockReq
 from main import stockInfoSearch
+
 app = Flask(__name__)
-basedir = '/'
+basedir = '/flask'
 bootstrap = Bootstrap(app)
 app.secret_key = 'myverylongsecretkey'
 
