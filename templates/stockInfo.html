@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}股票信息查询{% endblock %}
+
+{% block content %}
+<div align = "left" class="container"> 
+  <form action="" method="post" name="singleStockInputs">
+    {{ form.csrf_token }}
+	{{ form.hidden_tag()}}
+      <p>
+	  <h4>输入股票代码查询</h4>
+          股票代码: {{ form.stockId}} <br>
+      </p>
+	  <hr>
+	  <p>
+	  <h4>输入公司名称查询</h4>
+          公司名称: {{ form.compName}} <br>
+      </p>
+	  <hr>
+      <p><input type="submit" value="查询"></p>
+  </form>
+
+</div> 
+{% endblock %}

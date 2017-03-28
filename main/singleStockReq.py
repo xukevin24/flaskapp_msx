@@ -10,9 +10,10 @@ from strategy import donchain_strategy as donchain_strategy
 from strategy import bband_strategy as bband_strategy
 from strategy import smacross_strategy as smacross_strategy
 from strategy import test_strategy as test_strategy
-from strategy import time_strategy as time_strategy
-from strategy import ma_strategy as ma_strategy
-from strategy import percent_strategy as percent_strategy
+from strategy import time_strategy
+from strategy import ma_strategy
+from strategy import mv_strategy
+
 from trade import trade as Trade
 import data_api
 from simulate import simulate
@@ -25,19 +26,26 @@ class singleStockReq:
 #        flash(datas.datas[0])
 #        return redirect(url_for('test'))
         #and form.validate_on_submit()
-        if form.enterStr.data==form.exitStr.data:
-            if form.enterStr.data=='random_strategy':
-                s=random_strategy.RandomStrategy()
-            if form.enterStr.data=='smacross_strategy':
+        if form.strategy.data:
+            if form.strategy.data=='random_strategy':
+                perct=form.randPerct.data
+                s=random_strategy.Strategy(perct)
+            if form.strategy.data=='smacross_strategy':
                 shortD=form.smaShort.data
                 longD=form.smaLong.data
                 s=smacross_strategy.SMACrossStrategy(shortD,longD)
-            if form.enterStr.data=='bband_strategy':
+            if form.strategy.data=='bband_strategy':
                 s=bband_strategy.BBandStrategy(form.bbandDay.data)
-            if form.enterStr.data=='donchain_strategy':
+            if form.strategy.data=='donchain_strategy':
                 shortD=form.donChianShort.data
                 longD=form.donChianLong.data
-                s=donchain_strategy.DonchainStrategy(longD,shortD)
+                s=donchain_strategy.Strategy(longD,shortD)
+            if form.strategy.data=='sma':
+                Narr=[form.smaFirst.data, form.smaSecond.data, form.smaThird.data]
+                s=ma_strategy.Strategy(Narr)
+            if form.strategy.data == 'mv_strategy':
+                mvDay=form.mvDay.data
+                s=mv_strategy.Strategy(mvDay)
             self.account = simulate(self.datas, s, Trade.Trade)
     
     # 返回测试结果的重要 KPIs      

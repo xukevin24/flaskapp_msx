@@ -24,7 +24,7 @@ function klineChart(kdata,divId,enterTrades,exitTrades){
 	var values=[]
 	var volumes=[]
 	var closes=[]
-	for (var i = 0, len = kdata.length; i < len; i++){
+	for (var i = kdata.length-1; i >= 0; i--){
 		var date=kdata[i][0];
 		var vol=kdata[i][5];
 		var val=[kdata[i][1],kdata[i][2],kdata[i][4],kdata[i][3]];

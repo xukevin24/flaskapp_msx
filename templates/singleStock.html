@@ -7,20 +7,27 @@
     {{ form.csrf_token }}
 	{{ form.hidden_tag()}}
       <p>
+	  <h3> 策略 </h3>
           股票代码: {{ form.stockId}} <br>
           起始资金： {{form.initMoney}} <br>
           回测开始日期(yyyy-mm-dd)： {{form.startDate}} <br>
           回测终止日期(yyyy-mm-dd)： {{form.endDate}} <br>
-          进场策略： {{form.enterStr}} <br>
-          出场策略： {{form.exitStr}} <br>
+          策略选择： {{form.strategy}} <br>
       </p>
 	  <hr>
+	  
 	  <p>
-		  SMA交叉策略短天数： {{form.smaShort}} <br>
+	  <h3> 策略参数 </h3>
+		  随机策略（整数百分比）： {{form.randPerct}} <br>
+		  SMA交叉策略短天数： {{form.smaShort}}
 		  SMA交叉策略长天数： {{form.smaLong}} <br>
-		  唐奇安通道策略短天数： {{form.donChianShort}} <br>
-		  唐奇安通道策略长天数： {{form.donChianLong}} <br>
+		  SMA策略天数(小)： {{form.smaFirst}}
+		  SMA策略天数(中)： {{form.smaSecond}}
+		  SMA策略天数(大)： {{form.smaThird}} <br>
 		  布林格区间策略天数： {{form.bbandDay}} <br>
+		  唐奇安通道策略短天数： {{form.donChianShort}}
+		  唐奇安通道策略长天数： {{form.donChianLong}} <br>
+		  MV策略天数： {{form.mvDay}}<br>
 	  </p>
 	  
       <p><input type="submit" value="测试"></p>

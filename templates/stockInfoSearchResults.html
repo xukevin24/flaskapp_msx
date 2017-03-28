@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}股票信息查询结果{% endblock %}
+
+{% block content %}
+
+<div align = "center" class="container"> 
+
+<table class="table">
+	   <caption>股票信息</caption>
+	   <tr>
+	   <th>代码</th>
+	   <th>公司</th>
+	   <th>所属行业</th>
+	   <th>地区</th>
+	   <th>市盈率</th>
+	   <th>流通股本(亿)</th>
+	   <th>总股本(亿)</th>
+	   <th>总资产(万)</th>
+	   <th>流动资产</th>
+	   <th>固定资产</th>
+	   <th>公积金</th>
+	   <th>每股公积金</th>
+	   <th>每股收益</th>
+	   <th>每股净资</th>
+	   <th>市净率</th>
+	   <th>上市日期</th>
+	   <th>未分利润</th>
+	   <th>每股未分配</th>
+	   <th>收入同比(%)</th>
+	   <th>利润同比(%)</th>
+	   <th>毛利率(%)</th>
+	   <th>净利润率(%)</th>
+	   <th>股东人数</th>
+	   </tr>
+		<tbody>
+			<tr>
+			{% for info in stockInfo %}
+				<td>{{info}}</td>
+			{% endfor %}
+			</tr>
+		</tbody>
+	  </table>
+
+{% endblock %}

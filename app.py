@@ -8,7 +8,7 @@ from flask import Flask, render_template, Response, redirect, url_for, request, 
 from flask_bootstrap import Bootstrap
 from main import inputForms
 from main import singleStockReq
-
+from main import stockInfoSearch
 app = Flask(__name__)
 basedir = '/'
 bootstrap = Bootstrap(app)
@@ -20,12 +20,11 @@ def index():
 
 @app.route('/singleStock',methods=['GET', 'POST'])
 def singleStock():
-#    error=None
     form=inputForms.singleStockForm()
     if request.method == 'POST':
         ctrl=singleStockReq.singleStockReq(form)
         # 准备测试条件和结果表格所需数据
-        test_assumptions=[form.stockId.data, form.enterStr.data, form.exitStr.data]
+        test_assumptions=[form.stockId.data, form.strategy.data]
 #        #test
 #        flash(ctrl.resultKPIs())
 #        return redirect(url_for('test'))
@@ -43,6 +42,18 @@ def singleStock():
 #            error='cannot finish simulation test for this stock!'
 #            return redirect('test.html', error=error)
     return render_template('singleStock.html', form=form)
+
+@app.route('/stockInfo',methods=['GET', 'POST'])
+def stockInfo():
+    form=inputForms.stockInfoForm()
+    if request.method == 'POST':
+        ctrl=stockInfoSearch.Search(form)
+        templateData = {
+        'stockInfo': ctrl.info
+                }
+        return render_template('stockInfoSearchResults.html', **templateData)
+    return render_template('stockInfo.html', form=form)
+
 
 @app.route('/test')
 def test():
