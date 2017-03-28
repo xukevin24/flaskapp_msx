@@ -9,6 +9,9 @@ import os
 cwd = os.getcwd()
 if cwd not in sys.path:
     sys.path.insert(0, os.getcwd())
+project_dir='/home/pi/flaskapp/flaskapp_msx'
+sys.path.insert(0,project_dir)
+
 from flask import Flask, render_template, Response, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from main import inputForms
