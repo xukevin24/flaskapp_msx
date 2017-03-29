@@ -21,7 +21,11 @@ from simulate import simulate
 class singleStockReq:
     def __init__(self, form):
         self.datas= data_api.KData()
-        self.datas.init_data(str(form.stockId.data))
+        
+        if not form.startDate.data:
+            self.datas.init_data_from_db(str(form.stockId.data), index=False, end=str(form.endDate.data))
+        else:
+            self.datas.init_data_from_db(str(form.stockId.data), index=False, start=str(form.startDate.data), end=str(form.endDate.data))
         #test
 #        flash(datas.datas[0])
 #        return redirect(url_for('test'))
