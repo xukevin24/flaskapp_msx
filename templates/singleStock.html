@@ -7,17 +7,24 @@
     {{ form.csrf_token }}
 	{{ form.hidden_tag()}}
       <p>
-	  <h3> 策略 </h3>
           股票代码: {{ form.stockId}} <br>
           起始资金： {{form.initMoney}} <br>
           回测开始日期(yyyy-mm-dd)： {{form.startDate}} <br>
           回测终止日期(yyyy-mm-dd)： {{form.endDate}} <br>
-          策略选择： {{form.strategy}} <br>
+		  <hr>
+		  <p>
+		  <font color="red">说明： 如果做单个策略测试，把多个策略比较选项设为“无”； 同样,在做多个策略测试比较时，把单个策略选项设为“无”</font>
+		  <p>
+		  <br>
+          单个策略选择： {{form.strategy}}<br>
+		  <br>
+		  <hr>
+		  多个策略比较（按住CTRL选择多个策略）： {{form.strategies}} <br>
       </p>
 	  <hr>
 	  
 	  <p>
-	  <h3> 策略参数 </h3>
+	  <h4> 策略参数 </h4>
 		  随机策略（整数百分比）： {{form.randPerct}} <br>
 		  SMA交叉策略短天数： {{form.smaShort}}
 		  SMA交叉策略长天数： {{form.smaLong}} <br>

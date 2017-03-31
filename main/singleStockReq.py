@@ -30,7 +30,7 @@ class singleStockReq:
 #        flash(datas.datas[0])
 #        return redirect(url_for('test'))
         #and form.validate_on_submit()
-        if form.strategy.data:
+        if (form.strategy.data !='na') and (form.strategies.data==['na']):
             if form.strategy.data=='random_strategy':
                 perct=form.randPerct.data
                 s=random_strategy.Strategy(perct)
@@ -51,11 +51,44 @@ class singleStockReq:
                 mvDay=form.mvDay.data
                 s=mv_strategy.Strategy(mvDay)
             self.account = simulate(self.datas, s, Trade.Trade)
+        if (form.strategy.data =='na') and (form.strategies.data!=['na']):
+            self.account=[]
+            self.strategies=[]
+            for strategy in form.strategies.data:
+                if strategy=='random_strategy':
+                    perct=form.randPerct.data
+                    s=random_strategy.Strategy(perct)
+                if strategy=='smacross_strategy':
+                    shortD=form.smaShort.data
+                    longD=form.smaLong.data
+                    s=smacross_strategy.SMACrossStrategy(shortD,longD)
+                if strategy=='bband_strategy':
+                    s=bband_strategy.BBandStrategy(form.bbandDay.data)
+                if strategy=='donchain_strategy':
+                    shortD=form.donChianShort.data
+                    longD=form.donChianLong.data
+                    s=donchain_strategy.Strategy(longD,shortD)
+                if strategy=='sma':
+                    Narr=[form.smaFirst.data, form.smaSecond.data, form.smaThird.data]
+                    s=ma_strategy.Strategy(Narr)
+                if strategy == 'mv_strategy':
+                    mvDay=form.mvDay.data
+                    s=mv_strategy.Strategy(mvDay)
+                self.account.append(simulate(self.datas, s, Trade.Trade))
+                self.strategies.append(strategy)
     
     # 返回测试结果的重要 KPIs      
     def resultKPIs(self):
-        return [self.account.init_cash, self.account.cash, self.account.statistics.profit, self.account.statistics.totalProfit, self.account.statistics.totalLoss, 
+        if type(self.account) is not list:
+            return [self.account.init_cash, self.account.cash, self.account.statistics.profit, self.account.statistics.totalProfit, self.account.statistics.totalLoss, 
                             self.account.statistics.profitRatio, self.account.statistics.num, self.account.statistics.fee, self.account.statistics.succRatio, self.account.statistics.profitRatio_single, self.account.statistics.profitRatio_compound]
+        else:
+            kpisMulti=[]
+            for i, account in enumerate(self.account):
+                kpisMulti.append([self.strategies[i], account.init_cash, account.cash, account.statistics.profit, account.statistics.totalProfit, account.statistics.totalLoss, 
+                            account.statistics.profitRatio, account.statistics.num, account.statistics.fee, account.statistics.succRatio, account.statistics.profitRatio_single, account.statistics.profitRatio_compound])
+            return kpisMulti
+        
     # 返回K线数据
     def kdata(self):        
         kdata=[]

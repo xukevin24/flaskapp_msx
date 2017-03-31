@@ -33,23 +33,29 @@ def singleStock():
     if request.method == 'POST':
         ctrl=singleStockReq.singleStockReq(form)
         # 准备测试条件和结果表格所需数据
-        test_assumptions=[form.stockId.data, form.strategy.data]
 #        #test
-#        flash(ctrl.resultKPIs())
+#        flash(test_assumptions)
 #        return redirect(url_for('test'))
+        if (form.strategy.data !='na') and (form.strategies.data==['na']):
+            test_assumptions=[form.stockId.data, form.strategy.data]
+            templateData = {
+            'strategy': form.strategy.data,
+            'test_assumptions': test_assumptions,
+            'kpis_display': ctrl.resultKPIs(),
+            'kdata': ctrl.kdata(),
+            'trades_all': ctrl.tradesInfo()[0],
+            'trades_enter': ctrl.tradesInfo()[1],
+            'trades_exit': ctrl.tradesInfo()[2]
+                    }        
+        if (form.strategy.data =='na') and (form.strategies.data!=['na']):
+            test_assumptions=[form.stockId.data, form.strategies.data]
+            templateData = {
+            'strategies': form.strategies.data,
+            'test_assumptions': test_assumptions,
+            'kpis_display': ctrl.resultKPIs()
+            }
 
-        templateData = {
-        'test_assumptions': test_assumptions,
-        'kpis_display': ctrl.resultKPIs(),
-        'kdata': ctrl.kdata(),
-        'trades_all': ctrl.tradesInfo()[0],
-        'trades_enter': ctrl.tradesInfo()[1],
-        'trades_exit': ctrl.tradesInfo()[2]
-                }
         return render_template('singleStockResults.html', **templateData)
-#        except:
-#            error='cannot finish simulation test for this stock!'
-#            return redirect('test.html', error=error)
     return render_template('singleStock.html', form=form)
 
 @app.route('/stockInfo',methods=['GET', 'POST'])

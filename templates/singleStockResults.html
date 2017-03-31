@@ -22,6 +22,8 @@
 		</tbody>
 	  </table>
 <hr>
+
+{% if strategy %}
 <table class="table">
 	   <caption>测试结果：KPI</caption>
 		<tr>
@@ -77,5 +79,41 @@ var trades_exit={{trades_exit|tojson()}};
 klineChart(klinedata,"main",trades_enter,trades_exit);
 
 </script>
+
+{%endif%}
+
+{%if strategies%}
+<table class="table">
+	   <caption>测试结果（KPI）比较</caption>
+		<tr>
+		  <th>策略</th>
+		  <th>初始资金</th>
+		  <th>最终资金</th>
+		  <th>利润</th>
+		  <th>盈利总额</th>
+		  <th>亏损总额</th>	  
+		  <th>总收益率</th>
+		  <th>总交易次数</th>
+		  <th>总费用</th>
+		  <th>胜率</th>
+		  <th>年化利润（单利）</th>
+		  <th>年化利润（复利）</th>
+		</tr>
+		<tbody>
+			{% for strategy in kpis_display %}
+			<tr>
+			{% for kpi in strategy %}
+				{%if kpi is string %}
+				<td>{{kpi}}</td>
+				{%else%}
+				<td>{{kpi|round(2)}}</td>
+				{%endif%}
+			{%endfor%}
+			</tr>
+			{% endfor %}
+		</tbody>
+</table>
+
+{%endif%}
 </div> 
 {% endblock %}
