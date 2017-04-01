@@ -25,16 +25,21 @@
 	  
 	  <p>
 	  <h4> 策略参数 </h4>
-		  随机策略（整数百分比）： {{form.randPerct}} <br>
-		  SMA交叉策略短天数： {{form.smaShort}}
-		  SMA交叉策略长天数： {{form.smaLong}} <br>
-		  SMA策略天数(小)： {{form.smaFirst}}
-		  SMA策略天数(中)： {{form.smaSecond}}
-		  SMA策略天数(大)： {{form.smaThird}} <br>
-		  布林格区间策略天数： {{form.bbandDay}} <br>
-		  唐奇安通道策略短天数： {{form.donChianShort}}
-		  唐奇安通道策略长天数： {{form.donChianLong}} <br>
-		  MV策略天数： {{form.mvDay}}<br>
+		  随机策略（每天扔筛子，低于此百分比，买入或卖出）百分比： {{form.randPerct}} <br>
+		  <br>
+		  SMA交叉策略（SMA1向上突破SMA2，买入；SMA1向下突破SMA2，卖出）短天数： {{form.smaShort}}
+		  长天数： {{form.smaLong}} <br>
+		  <br>
+		  SMA策略（SMA1>SMA2>SMA3买入；不符合此条件卖出）天数(N1)： {{form.smaFirst}}
+		  天数(N2)： {{form.smaSecond}}
+		  天数(N3)： {{form.smaThird}} <br>
+		  <br>
+		  布林格区间策略（收盘价向上突破布林格下限，买入；收盘价向下突破布林格上限，卖出）天数： {{form.bbandDay}} <br>
+		  <br>
+		  唐奇安通道（N1日新高，买入）入场天数： {{form.donChianLong}} 
+		  唐奇安通道（N2日新低，卖出）出场天数： {{form.donChianShort}}<br>
+		  <br>
+		  MV策略（收盘价低于N天前买入，高于N天前卖出）天数： {{form.mvDay}}<br>
 	  </p>
 	  
       <p><input type="submit" value="测试"></p>

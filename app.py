@@ -69,7 +69,6 @@ def stockInfo():
         return render_template('stockInfoSearchResults.html', **templateData)
     return render_template('stockInfo.html', form=form)
 
-
 @app.route('/test')
 def test():
     return render_template('test.html')

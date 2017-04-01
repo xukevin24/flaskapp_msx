@@ -19,18 +19,18 @@ class singleStockForm(Form):
     strategies = SelectMultipleField('strategy', choices=choices, validators=[DataRequired()], default=['na'])
 
     
-    randPerct= IntegerField('randPerct')
-    smaShort= IntegerField('smaShort')
-    smaLong = IntegerField('smaLong')
-    smaFirst= IntegerField('smaFirst')
-    smaSecond= IntegerField('smaSecond')
-    smaThird= IntegerField('smaThird')
+    randPerct= IntegerField('randPerct', default=30)
+    smaShort= IntegerField('smaShort', default=5)
+    smaLong = IntegerField('smaLong', default=20)
+    smaFirst= IntegerField('smaFirst', default=5)
+    smaSecond= IntegerField('smaSecond', default=10)
+    smaThird= IntegerField('smaThird', default=20)
     
-    donChianShort = IntegerField('donChianShort')
-    donChianLong = IntegerField('donChianLong')
-    bbandDay = IntegerField('bbandDay')
+    donChianShort = IntegerField('donChianShort', default=10)
+    donChianLong = IntegerField('donChianLong', default=20)
+    bbandDay = IntegerField('bbandDay', default=20)
     
-    mvDay = IntegerField('mvDay')
+    mvDay = IntegerField('mvDay', default=20)
     
 class stockInfoForm(Form):
     stockId = StringField('stockId', validators=[DataRequired()])
